@@ -11,9 +11,9 @@ Premium one-page website voor Starbarber, Leuvensesteenweg 264, 3070 Kortenberg.
 - Oud adres op Instagram (2022): Karterstraat 49. Huidig adres volgens Google en de Instagram-bio: Leuvensesteenweg 264.
 
 ## Nog te bevestigen voor oplevering
-- [ ] **Prijzen**: er is geen prijslijst gevonden, dus overal staat "Op aanvraag". Invullen in `script.js` (bovenaan, `SERVICES`).
+- [ ] **Prijzen**: er is geen prijslijst gevonden, dus overal staat "Op aanvraag". Invullen in `index.html` (sectie DIENSTEN) en in de keuzelijst van het boekformulier.
 - [ ] Diensten kloppen? (knippen, fade/taper, knippen + baard, baard, kinderen)
-- [ ] Openingsuren (`HOURS` in `script.js`)
+- [ ] Openingsuren (`OPEN`, `CLOSE`, `CLOSED_DAYS` bovenaan `script.js`, plus de footer)
 - [ ] Toestemming voor de foto's (Instagram + Google Maps), liefst in hogere resolutie
 - [ ] Logo: in de menubalk staat nu "Star ★★★ Barber" in tekst. Hun echte logo staat op de gevel/het visitekaartje: vraag het bestand.
 
