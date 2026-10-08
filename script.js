@@ -1,244 +1,275 @@
-// ===== Pas hier diensten, prijzen & uren aan =====
-// Er is geen publieke prijslijst gevonden, dus staat er "Op aanvraag".
-// Zet een prijs als tekst, bv. price: "€20", en hij verschijnt overal.
-const SERVICES = [
-  { name: "Knippen", desc: "Schaar en tondeuse, klassiek of modern. Afgewerkt en gestyled.", price: "" },
-  { name: "Fade / Taper", desc: "Low, mid, high of skin fade, met een strakke overgang.", price: "" },
-  { name: "Knippen + baard", desc: "De complete fresh-up van top tot kin.", price: "" },
-  { name: "Baard", desc: "Trimmen, contouren en strakke lijnen.", price: "" },
-  { name: "Kinderen", desc: "Een nette cut voor de jongste klanten.", price: "" },
-];
+/* Starbarber Kortenberg — interacties */
+(() => {
+  "use strict";
 
-// 0 = zondag … 6 = zaterdag. [open, sluit] in "HH:MM", of null = gesloten.
-const HOURS = {
-  1: null, 2: null, 3: ["10:30", "19:00"], 4: ["10:30", "19:00"],
-  5: ["10:30", "19:00"], 6: ["10:30", "19:00"], 0: ["10:30", "19:00"],
-};
-const WHATSAPP = "32485956021";
-const SLOT_MIN = 30;   // lengte van een tijdslot
-const DAYS_AHEAD = 14; // hoe ver vooruit je kan kiezen
+  // ---------- Config ----------
+  const OPEN = 10 * 60 + 30; // 10:30
+  const CLOSE = 19 * 60;     // 19:00
+  const CLOSED_DAYS = [1, 2]; // 0 = zondag, 1 = maandag, 2 = dinsdag
+  const SLOT_MIN = 30;
+  const WHATSAPP = "32485956021";
+  const DAY_NAMES = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
+  const DAY_SHORT = ["zo", "ma", "di", "wo", "do", "vr", "za"];
+  const MONTHS = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
 
-const DAY_NAMES = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
-const DAY_SHORT = ["zo", "ma", "di", "wo", "do", "vr", "za"];
-const MONTHS = ["jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec"];
-const priceLabel = p => p.price || "Op aanvraag";
+  const $ = (s, el = document) => el.querySelector(s);
+  const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+  const pad = n => String(n).padStart(2, "0");
+  const fmt = m => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
 
-// ===== Dienstenlijst =====
-document.getElementById("priceList").innerHTML = SERVICES.map(p => `
-  <div class="menu__item">
-    <h3>${p.name}</h3><span class="menu__dots"></span><span class="menu__price${p.price ? "" : " menu__price--ask"}">${priceLabel(p)}</span>
-    <p>${p.desc}</p>
-  </div>`).join("");
+  // Huidige tijd in Brussel, ongeacht de tijdzone van de bezoeker
+  function brusselsNow() {
+    const p = Object.fromEntries(
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit", hour12: false,
+      }).formatToParts(new Date()).map(x => [x.type, x.value])
+    );
+    const date = new Date(+p.year, +p.month - 1, +p.day);
+    return { date, minutes: (+p.hour % 24) * 60 + +p.minute };
+  }
 
-// ===== Openingsuren + live status (Belgische tijd) =====
-function brusselsNow() {
-  const parts = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Europe/Brussels", year: "numeric", month: "2-digit", day: "2-digit",
-    weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false,
-  }).formatToParts(new Date());
-  const get = t => parts.find(p => p.type === t).value;
-  const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(get("weekday"));
-  return {
-    day,
-    mins: (+get("hour") % 24) * 60 + +get("minute"),
-    date: new Date(+get("year"), +get("month") - 1, +get("day")),
+  // ---------- Jaar ----------
+  $("#year").textContent = new Date().getFullYear();
+
+  // ---------- Nav ----------
+  const nav = $("#nav");
+  const mbar = $("#mbar");
+  const hero = $(".hero");
+  const onScroll = () => {
+    const y = window.scrollY;
+    nav.classList.toggle("scrolled", y > 20);
+    const pastHero = y > hero.offsetHeight * 0.6;
+    const booking = $("#boeken").getBoundingClientRect();
+    const inBooking = booking.top < innerHeight && booking.bottom > 0;
+    mbar.classList.toggle("show", pastHero && !inBooking);
   };
-}
-const toMins = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
-const pad = n => String(n).padStart(2, "0");
-const fmt = m => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
-const isoOf = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
-function renderHours() {
-  const { day, mins } = brusselsNow();
-  const order = [1, 2, 3, 4, 5, 6, 0];
-  document.getElementById("hours").innerHTML = order.map(d => {
-    const h = HOURS[d];
-    return `<tr class="${d === day ? "is-today" : ""}"><td>${DAY_NAMES[d]}</td><td>${h ? `${h[0]} – ${h[1]}` : "Gesloten"}</td></tr>`;
-  }).join("");
-
-  const today = HOURS[day];
-  const isOpen = today && mins >= toMins(today[0]) && mins < toMins(today[1]);
-  let text;
-  if (isOpen) {
-    text = `Nu open · tot ${today[1]}`;
-  } else if (today && mins < toMins(today[0])) {
-    text = `Gesloten · opent vandaag om ${today[0]}`;
-  } else {
-    let n = 1;
-    while (n < 8 && !HOURS[(day + n) % 7]) n++;
-    const next = HOURS[(day + n) % 7];
-    text = next ? `Gesloten · opent ${n === 1 ? "morgen" : DAY_NAMES[(day + n) % 7].toLowerCase()} om ${next[0]}` : "Gesloten";
-  }
-  document.querySelector("[data-status-text]").textContent = text;
-  document.querySelector("[data-status-box]").classList.toggle("is-open", !!isOpen);
-  const heroStatus = document.querySelector("[data-status]");
-  heroStatus.classList.toggle("is-open", !!isOpen);
-  heroStatus.textContent = isOpen ? `Nu open · Leuvensesteenweg 264` : `Kortenberg · Leuvensesteenweg 264`;
-}
-renderHours();
-setInterval(renderHours, 60_000);
-
-// ===== Afspraak via WhatsApp =====
-const form = document.getElementById("bookForm");
-const daysEl = document.getElementById("days");
-const slotsEl = document.getElementById("slots");
-const summary = document.getElementById("summary");
-const err = document.getElementById("bookErr");
-const serviceEl = document.getElementById("service");
-
-serviceEl.innerHTML = SERVICES.map((s, i) =>
-  `<option value="${s.name}" ${i === 1 ? "selected" : ""}>${s.name}${s.price ? ` — ${s.price}` : ""}</option>`
-).join("");
-
-function slotsFor(iso) {
-  const { date, mins } = brusselsNow();
-  const [y, mo, da] = iso.split("-").map(Number);
-  const h = HOURS[new Date(y, mo - 1, da).getDay()];
-  if (!h) return [];
-  const out = [];
-  for (let m = toMins(h[0]); m <= toMins(h[1]) - SLOT_MIN; m += SLOT_MIN) {
-    out.push({ m, past: iso === isoOf(date) && m <= mins + 30 });
-  }
-  return out;
-}
-
-function buildDays() {
-  const { date } = brusselsNow();
-  let html = "", first = null;
-  for (let i = 0; i < DAYS_AHEAD; i++) {
-    const d = new Date(date);
-    d.setDate(d.getDate() + i);
-    const iso = isoOf(d);
-    const slots = slotsFor(iso);
-    const disabled = !slots.length || slots.every(s => s.past);
-    if (!disabled && !first) first = iso;
-    const label = i === 0 ? "vandaag" : i === 1 ? "morgen" : DAY_SHORT[d.getDay()];
-    html += `<label><input type="radio" name="day" value="${iso}" ${disabled ? "disabled" : ""}>
-      <span><small>${label}</small><b>${d.getDate()}</b><em>${MONTHS[d.getMonth()]}</em></span></label>`;
-  }
-  daysEl.innerHTML = html;
-  if (first) daysEl.querySelector(`input[value="${first}"]`).checked = true;
-}
-
-function buildSlots() {
-  const day = form.querySelector("input[name=day]:checked");
-  if (!day) { slotsEl.innerHTML = `<p class="slots__empty">Kies eerst een dag.</p>`; return; }
-  slotsEl.innerHTML = slotsFor(day.value).map(s =>
-    `<label><input type="radio" name="time" value="${fmt(s.m)}" ${s.past ? "disabled" : ""}><span>${fmt(s.m)}</span></label>`
-  ).join("");
-}
-
-function selection() {
-  const dayIn = form.querySelector("input[name=day]:checked");
-  const timeIn = form.querySelector("input[name=time]:checked");
-  let dayLabel = "";
-  if (dayIn) {
-    const [y, mo, da] = dayIn.value.split("-").map(Number);
-    dayLabel = `${DAY_NAMES[new Date(y, mo - 1, da).getDay()].toLowerCase()} ${da} ${MONTHS[mo - 1]}`;
-  }
-  return {
-    service: serviceEl.value, day: dayIn?.value, dayLabel, time: timeIn?.value,
-    name: document.getElementById("name").value.trim(),
-    note: document.getElementById("note").value.trim(),
+  const burger = $("#burger");
+  const drawer = $("#drawer");
+  const setDrawer = open => {
+    burger.setAttribute("aria-expanded", open);
+    drawer.classList.toggle("open", open);
+    drawer.setAttribute("aria-hidden", !open);
+    document.body.style.overflow = open ? "hidden" : "";
   };
-}
+  burger.addEventListener("click", () => setDrawer(burger.getAttribute("aria-expanded") !== "true"));
+  $$("a", drawer).forEach(a => a.addEventListener("click", () => setDrawer(false)));
 
-function updateSummary() {
-  const s = selection();
-  err.textContent = "";
-  if (!s.day || !s.time) { summary.textContent = "Kies een dag en tijdstip."; return; }
-  summary.innerHTML = `<strong>${s.service}</strong> · ${s.dayLabel} om <strong>${s.time}</strong>`;
-}
+  // ---------- Reveal ----------
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const sibs = $$(".reveal", e.target.parentElement);
+      e.target.style.transitionDelay = `${Math.min(sibs.indexOf(e.target), 6) * 70}ms`;
+      e.target.classList.add("in");
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  $$(".reveal").forEach(el => io.observe(el));
 
-buildDays();
-buildSlots();
-updateSummary();
+  // ---------- Hero parallax ----------
+  const cards = $$(".hero__visual .card");
+  const visual = $(".hero__visual");
+  const base = ["rotate(-7deg)", "rotate(1deg)", "rotate(8deg)"];
+  if (matchMedia("(hover: hover) and (prefers-reduced-motion: no-preference)").matches) {
+    visual.parentElement.addEventListener("mousemove", e => {
+      const r = visual.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      cards.forEach((c, i) => {
+        const d = [14, 24, 18][i];
+        c.style.transform = `translate(${x * d}px, ${y * d}px) ${base[i]}`;
+      });
+    });
+  }
 
-form.addEventListener("change", e => {
-  if (e.target.name === "day") buildSlots();
+  // ---------- Openingsuren & status ----------
+  function statusText() {
+    const { date, minutes } = brusselsNow();
+    const d = date.getDay();
+    const openToday = !CLOSED_DAYS.includes(d);
+    if (openToday && minutes >= OPEN && minutes < CLOSE) {
+      return { open: true, text: `Nu open · tot ${fmt(CLOSE)}` };
+    }
+    if (openToday && minutes < OPEN) return { open: false, text: `Gesloten · opent om ${fmt(OPEN)}` };
+    let n = (d + 1) % 7;
+    while (CLOSED_DAYS.includes(n)) n = (n + 1) % 7;
+    const when = n === (d + 1) % 7 ? "morgen" : DAY_NAMES[n].toLowerCase();
+    return { open: false, text: `Gesloten · opent ${when} ${fmt(OPEN)}` };
+  }
+
+  function renderStatus() {
+    const s = statusText();
+    const hs = $("#heroStatus");
+    hs.classList.toggle("is-open", s.open);
+    hs.classList.toggle("is-closed", !s.open);
+    $(".badge-open__text", hs).textContent = s.text;
+    $$("[data-status]").forEach(el => {
+      el.className = `status ${s.open ? "is-open" : "is-closed"}`;
+      el.innerHTML = `<span class="dot"></span>${s.open ? "Nu open" : "Gesloten"}`;
+    });
+  }
+
+  function renderHours() {
+    const today = brusselsNow().date.getDay();
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    const html = order.map(d => {
+      const closed = CLOSED_DAYS.includes(d);
+      return `<li class="${d === today ? "today" : ""}"><span>${DAY_NAMES[d]}</span><span>${closed ? "Gesloten" : `${fmt(OPEN)} – ${fmt(CLOSE)}`}</span></li>`;
+    }).join("");
+    $$("[data-hours]").forEach(ul => (ul.innerHTML = html));
+  }
+
+  renderHours();
+  renderStatus();
+  setInterval(renderStatus, 60_000);
+
+  // ---------- Boekingsformulier ----------
+  const form = $("#bookForm");
+  const daysEl = $("#days");
+  const slotsEl = $("#slots");
+  const summary = $("#summary");
+  const err = $("#bookErr");
+
+  function buildDays() {
+    const { date } = brusselsNow();
+    let html = "";
+    let firstSelectable = null;
+    for (let i = 0; i < 14; i++) {
+      const d = new Date(date);
+      d.setDate(d.getDate() + i);
+      const closed = CLOSED_DAYS.includes(d.getDay());
+      const iso = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+      const label = i === 0 ? "vandaag" : i === 1 ? "morgen" : DAY_SHORT[d.getDay()];
+      const disabled = closed || (i === 0 && slotsFor(iso).every(s => s.past));
+      if (!disabled && firstSelectable === null) firstSelectable = iso;
+      html += `<label><input type="radio" name="day" value="${iso}" ${disabled ? "disabled" : ""}>
+        <span><small>${label}</small><b>${d.getDate()}</b><em>${MONTHS[d.getMonth()]}</em></span></label>`;
+    }
+    daysEl.innerHTML = html;
+    if (firstSelectable) $(`input[value="${firstSelectable}"]`, daysEl).checked = true;
+  }
+
+  function slotsFor(iso) {
+    const { date, minutes } = brusselsNow();
+    const todayIso = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+    const out = [];
+    for (let m = OPEN; m <= CLOSE - SLOT_MIN; m += SLOT_MIN) {
+      out.push({ m, past: iso === todayIso && m <= minutes + 30 });
+    }
+    return out;
+  }
+
+  function buildSlots() {
+    const day = form.day && $("input[name=day]:checked", form);
+    if (!day) { slotsEl.innerHTML = `<p class="slots__empty">Kies eerst een dag.</p>`; return; }
+    slotsEl.innerHTML = slotsFor(day.value).map(s =>
+      `<label><input type="radio" name="time" value="${fmt(s.m)}" ${s.past ? "disabled" : ""}><span>${fmt(s.m)}</span></label>`
+    ).join("");
+  }
+
+  function selection() {
+    const service = $("#service").value;
+    const dayIn = $("input[name=day]:checked", form);
+    const timeIn = $("input[name=time]:checked", form);
+    const name = $("#name").value.trim();
+    const note = $("#note").value.trim();
+    let dayLabel = "";
+    if (dayIn) {
+      const [y, mo, da] = dayIn.value.split("-").map(Number);
+      const d = new Date(y, mo - 1, da);
+      dayLabel = `${DAY_NAMES[d.getDay()].toLowerCase()} ${da} ${MONTHS[mo - 1]}`;
+    }
+    return { service, day: dayIn?.value, dayLabel, time: timeIn?.value, name, note };
+  }
+
+  function updateSummary() {
+    const s = selection();
+    err.textContent = "";
+    if (!s.day || !s.time) { summary.textContent = "Kies een dag en tijdstip."; return; }
+    summary.innerHTML = `<strong>${s.service}</strong> · ${s.dayLabel} om <strong>${s.time}</strong>`;
+  }
+
+  buildDays();
+  buildSlots();
   updateSummary();
-});
 
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  const s = selection();
-  if (!s.day) return (err.textContent = "Kies een dag.");
-  if (!s.time) return (err.textContent = "Kies een tijdstip.");
-  if (!s.name) { document.getElementById("name").focus(); return (err.textContent = "Vul je naam in."); }
-
-  const msg = [
-    `Hallo Starbarber! 💈 Ik wil graag een afspraak maken.`,
-    ``,
-    `• Naam: ${s.name}`,
-    `• Dienst: ${s.service}`,
-    `• Wanneer: ${s.dayLabel} om ${s.time}`,
-    s.note ? `• Opmerking: ${s.note}` : null,
-    ``,
-    `Past dat?`,
-  ].filter(l => l !== null).join("\n");
-
-  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-});
-
-// ===== Nav =====
-const nav = document.getElementById("nav");
-const toggle = document.getElementById("navToggle");
-const onScroll = () => nav.classList.toggle("is-scrolled", window.scrollY > 40);
-window.addEventListener("scroll", onScroll, { passive: true });
-onScroll();
-toggle.addEventListener("click", () => {
-  const open = nav.classList.toggle("is-open");
-  toggle.setAttribute("aria-expanded", open);
-});
-document.querySelectorAll("#navLinks a").forEach(a => a.addEventListener("click", () => {
-  nav.classList.remove("is-open");
-  toggle.setAttribute("aria-expanded", "false");
-}));
-
-// ===== Reveal on scroll =====
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
-}, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-document.querySelectorAll(".reveal").forEach((el, i) => {
-  el.style.transitionDelay = `${(i % 3) * 90}ms`;
-  io.observe(el);
-});
-
-// ===== Tellers =====
-const counterIO = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target, end = parseFloat(el.dataset.count), dec = +(el.dataset.decimals || 0);
-    const start = performance.now(), dur = 1400;
-    const tick = t => {
-      const k = Math.min(1, (t - start) / dur), v = end * (1 - Math.pow(1 - k, 3));
-      el.textContent = v.toFixed(dec).replace(".", ",");
-      if (k < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    counterIO.unobserve(el);
+  form.addEventListener("change", e => {
+    if (e.target.name === "day") buildSlots();
+    updateSummary();
   });
-}, { threshold: 0.6 });
-document.querySelectorAll("[data-count]").forEach(el => counterIO.observe(el));
 
-// ===== Lightbox =====
-const items = [...document.querySelectorAll(".gallery__item img")];
-const lb = document.getElementById("lightbox");
-const lbImg = lb.querySelector("img");
-let idx = 0;
-const show = i => { idx = (i + items.length) % items.length; lbImg.src = items[idx].src; lbImg.alt = items[idx].alt; };
-items.forEach((img, i) => img.parentElement.addEventListener("click", () => { show(i); lb.hidden = false; document.body.style.overflow = "hidden"; }));
-const close = () => { lb.hidden = true; document.body.style.overflow = ""; };
-lb.querySelector(".lightbox__close").addEventListener("click", close);
-lb.querySelector(".lightbox__prev").addEventListener("click", e => { e.stopPropagation(); show(idx - 1); });
-lb.querySelector(".lightbox__next").addEventListener("click", e => { e.stopPropagation(); show(idx + 1); });
-lb.addEventListener("click", e => { if (e.target === lb) close(); });
-document.addEventListener("keydown", e => {
-  if (lb.hidden) return;
-  if (e.key === "Escape") close();
-  if (e.key === "ArrowLeft") show(idx - 1);
-  if (e.key === "ArrowRight") show(idx + 1);
-});
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const s = selection();
+    if (!s.day) return (err.textContent = "Kies een dag.");
+    if (!s.time) return (err.textContent = "Kies een tijdstip.");
+    if (!s.name) { $("#name").focus(); return (err.textContent = "Vul je naam in."); }
 
-document.getElementById("year").textContent = new Date().getFullYear();
+    const msg = [
+      `Hallo Starbarber! 💈 Ik wil graag een afspraak maken.`,
+      ``,
+      `• Naam: ${s.name}`,
+      `• Dienst: ${s.service}`,
+      `• Wanneer: ${s.dayLabel} om ${s.time}`,
+      s.note ? `• Opmerking: ${s.note}` : null,
+      ``,
+      `Past dat?`,
+    ].filter(l => l !== null).join("\n");
+
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+  });
+
+  // ---------- Lightbox ----------
+  const items = $$(".gallery__item");
+  const lb = $("#lightbox");
+  const lbImg = $("#lbImg");
+  const lbCap = $("#lbCap");
+  let idx = 0;
+  let lastFocus = null;
+
+  const show = i => {
+    idx = (i + items.length) % items.length;
+    const it = items[idx];
+    lbImg.src = it.dataset.src;
+    lbImg.alt = $("img", it).alt;
+    lbCap.textContent = it.dataset.cap;
+  };
+  const openLb = i => {
+    lastFocus = document.activeElement;
+    show(i);
+    lb.classList.add("open");
+    lb.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    $("#lbClose").focus();
+  };
+  const closeLb = () => {
+    lb.classList.remove("open");
+    lb.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    lastFocus?.focus();
+  };
+
+  items.forEach((it, i) => it.addEventListener("click", () => openLb(i)));
+  $("#lbClose").addEventListener("click", closeLb);
+  $("#lbPrev").addEventListener("click", () => show(idx - 1));
+  $("#lbNext").addEventListener("click", () => show(idx + 1));
+  lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
+  addEventListener("keydown", e => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowLeft") show(idx - 1);
+    if (e.key === "ArrowRight") show(idx + 1);
+  });
+
+  // swipe op mobiel
+  let sx = 0;
+  lb.addEventListener("touchstart", e => (sx = e.touches[0].clientX), { passive: true });
+  lb.addEventListener("touchend", e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+})();

@@ -1,29 +1,32 @@
 <!doctype html>
-<html lang="nl">
+<html lang="nl-BE">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Starbarber Kortenberg — Barbier &amp; herenkapper · Leuvensesteenweg 264</title>
   <meta name="description" content="Starbarber Kortenberg: fades, tapers, baardverzorging en kids cuts. Op afspraak, woensdag t/m zondag. 4,6★ op Google uit 240+ reviews. Leuvensesteenweg 264, 3070 Kortenberg.">
-  <meta name="theme-color" content="#0d0c0a">
+  <meta name="theme-color" content="#ffffff">
   <meta property="og:title" content="Starbarber Kortenberg">
   <meta property="og:description" content="Strakke fades &amp; verzorgde baarden aan de Leuvensesteenweg. Boek je plek via WhatsApp.">
-  <meta property="og:image" content="img/hero-stoel.jpg">
+  <meta property="og:image" content="img/gevel.jpg">
+  <meta property="og:type" content="website">
   <link rel="icon" href="img/logo-gold.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,700;1,6..96,500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="theme.css">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BarberShop",
     "name": "Starbarber Kortenberg",
     "image": "img/gevel.jpg",
-    "telephone": "+32 485 95 60 21",
+    "telephone": "+32485956021",
     "address": {"@type": "PostalAddress","streetAddress": "Leuvensesteenweg 264","postalCode": "3070","addressLocality": "Kortenberg","addressCountry": "BE"},
     "geo": {"@type": "GeoCoordinates","latitude": 50.8877978,"longitude": 4.5423127},
-    "openingHours": "We-Su 10:30-19:00",
+    "openingHoursSpecification": [{"@type": "OpeningHoursSpecification","dayOfWeek": ["Wednesday","Thursday","Friday","Saturday","Sunday"],"opens": "10:30","closes": "19:00"}],
     "aggregateRating": {"@type": "AggregateRating","ratingValue": "4.6","reviewCount": "243"},
     "sameAs": ["https://www.instagram.com/starbarber.kortenberg/", "https://www.tiktok.com/@starbarberkortenberg"]
   }
@@ -31,242 +34,362 @@
 </head>
 <body>
 
-<header class="nav" id="nav">
-  <a href="#top" class="nav__brand" aria-label="Starbarber Kortenberg — naar boven">
-    <img src="img/logo-cream.svg" alt="" class="nav__logo">
-    <span>Star<em>barber</em></span>
-  </a>
-  <nav class="nav__links" id="navLinks">
-    <a href="#diensten">Diensten</a>
-    <a href="#werk">Ons werk</a>
-    <a href="#reviews">Reviews</a>
-    <a href="#boeken">Afspraak</a>
-    <a href="#bezoek">Bezoek</a>
-  </nav>
-  <a href="#boeken" class="btn btn--gold nav__cta">Maak een afspraak</a>
-  <button class="nav__toggle" id="navToggle" aria-label="Menu openen" aria-expanded="false"><span></span><span></span></button>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__media">
-      <img src="img/hero-stoel.jpg" alt="Klant in de stoel bij Starbarber Kortenberg" class="hero__img">
-    </div>
-    <div class="hero__content">
-      <p class="eyebrow"><span class="status" data-status>Kortenberg · Leuvensesteenweg 264</span></p>
-      <h1 class="hero__title">Cleane cuts.<br><em>Scherpe fades.</em></h1>
-      <p class="hero__lead">Barbier en herenkapper aan de Leuvensesteenweg in Kortenberg. Van een strakke skin fade tot een verzorgde baard: jong of oud, iedereen is welkom.</p>
-      <span class="hero__badge">★ Enkel op afspraak, dus geen wachtrij</span>
-      <div class="hero__actions">
-        <a href="#boeken" class="btn btn--gold">Maak een afspraak</a>
-        <a href="tel:+32485956021" class="btn btn--ghost">Bel 0485 95 60 21</a>
-      </div>
-      <div class="hero__proof">
-        <div class="stars" aria-hidden="true">★★★★★</div>
-        <p><strong>4,6</strong> op Google · <span>243 reviews</span></p>
-      </div>
-    </div>
-    <a href="#over" class="hero__scroll" aria-label="Scroll naar beneden"><span></span></a>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Skin fade</span><i>★</i><span>High fade</span><i>★</i><span>Taper</span><i>★</i><span>Baard trimmen</span><i>★</i><span>Slick back</span><i>★</i><span>Kids cuts</span><i>★</i><span>Op afspraak</span><i>★</i>
-      <span>Skin fade</span><i>★</i><span>High fade</span><i>★</i><span>Taper</span><i>★</i><span>Baard trimmen</span><i>★</i><span>Slick back</span><i>★</i><span>Kids cuts</span><i>★</i><span>Op afspraak</span><i>★</i>
-    </div>
-  </div>
-
-  <!-- OVER -->
-  <section class="section about" id="over">
-    <div class="about__photos reveal">
-      <img src="img/gevel.jpg" alt="De gevel van Starbarber aan de Leuvensesteenweg in Kortenberg" class="about__img about__img--a" loading="lazy">
-      <img src="img/werkplek.jpg" alt="Werkplek met spiegel en wastafel bij Starbarber" class="about__img about__img--b" loading="lazy">
-      <img src="img/logo-gold.svg" alt="" class="about__badge">
-    </div>
-    <div class="about__text reveal">
-      <p class="eyebrow">Over Starbarber</p>
-      <h2>Jouw vaste <em>barbier</em> in Kortenberg.</h2>
-      <p>Bij Starbarber draait alles om de cleanste cuts en de scherpste fades. We werken tot op het detail: de lijnen, de overgang, de afwerking. Pas als jij tevreden in de spiegel kijkt, zijn wij klaar.</p>
-      <p>Omdat we enkel op afspraak werken, zit je op jouw moment in de stoel. Vaders, zonen, studenten: in onze zaak aan de Leuvensesteenweg is iedereen welkom.</p>
-      <ul class="stats">
-        <li><strong data-count="4.6" data-decimals="1">4,6</strong><span>Google-score</span></li>
-        <li><strong data-count="243">243</strong><span>reviews</span></li>
-        <li><strong>5/7</strong><span>dagen open</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- DIENSTEN -->
-  <section class="section services" id="diensten">
-    <div class="section__head reveal">
-      <p class="eyebrow">Diensten</p>
-      <h2>Alles voor <em>haar &amp; baard</em>.</h2>
-      <p class="muted">Vraag gerust naar de prijs als je je afspraak maakt, via WhatsApp of telefoon.</p>
-    </div>
-    <div class="menu reveal" id="priceList"><!-- gevuld door script.js --></div>
-    <p class="menu__note muted">Twijfel je welke stijl bij je past? Zeg het gewoon in de stoel, we denken met je mee.</p>
-  </section>
-
-  <!-- WERK -->
-  <section class="section work" id="werk">
-    <div class="section__head reveal">
-      <p class="eyebrow">Ons werk</p>
-      <h2>Recht uit de <em>stoel</em>.</h2>
-      <a href="https://www.instagram.com/starbarber.kortenberg/" target="_blank" rel="noopener" class="link-arrow">Meer op Instagram @starbarber.kortenberg →</a>
-    </div>
-    <div class="gallery">
-      <button class="gallery__item g-tall reveal"><img src="img/fade-baard.jpg" alt="Mid fade met textuur en verzorgde baard" loading="lazy"><span>Fade + baard</span></button>
-      <button class="gallery__item reveal"><img src="img/zaak.jpg" alt="Het interieur van Starbarber met de kappersstoelen" loading="lazy"><span>De zaak</span></button>
-      <button class="gallery__item g-tall reveal"><img src="img/crop-fade.jpg" alt="Korte crop met skin fade" loading="lazy"><span>Crop + skin fade</span></button>
-      <button class="gallery__item g-tall reveal"><img src="img/taper-baard.jpg" alt="Taper fade met baard" loading="lazy"><span>Taper + baard</span></button>
-      <button class="gallery__item g-tall reveal"><img src="img/man-bun-fade.jpg" alt="Man bun met fade aan de zijkanten" loading="lazy"><span>Man bun + fade</span></button>
-      <button class="gallery__item reveal"><img src="img/interieur.jpg" alt="Productwand en kappersstoel bij Starbarber" loading="lazy"><span>Producten</span></button>
-      <button class="gallery__item g-tall reveal"><img src="img/slick-back.jpg" alt="Slick back met low fade" loading="lazy"><span>Slick back</span></button>
-      <button class="gallery__item g-tall reveal"><img src="img/pompadour.jpg" alt="Pompadour met taper" loading="lazy"><span>Pompadour</span></button>
-      <button class="gallery__item g-tall reveal"><img src="img/side-part.jpg" alt="Side part met volume" loading="lazy"><span>Side part</span></button>
-    </div>
-  </section>
-
-  <!-- REVIEWS -->
-  <section class="section reviews" id="reviews">
-    <div class="section__head reveal">
-      <p class="eyebrow">Wat klanten zeggen</p>
-      <h2><span class="big">4,6</span> uit <em>243 reviews</em></h2>
-    </div>
-    <div class="quotes">
-      <figure class="quote reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>“Super toffe kerels en doen hun werk super goed!! Werken tot op details. Ik heb mijn vaste barbier gevonden!”</blockquote>
-        <figcaption>Bram V. · Google review</figcaption>
-      </figure>
-      <figure class="quote reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>“Na 2 kappersbeurten op een maand ga ik hier zeker mijn vaste kapper van maken. Zeer vriendelijk team en zeer goede kappers.”</blockquote>
-        <figcaption>Arnoud S. · Google review</figcaption>
-      </figure>
-      <figure class="quote reveal">
-        <div class="stars">★★★★★</div>
-        <blockquote>“Geweldig gewoon. Als je in Kortenberg woont of langsgaat, spring dan even langs bij Starbarber. Echt een aanrader!!”</blockquote>
-        <figcaption>Jenti V. · Google review</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- BOEKEN -->
-  <section class="section booking" id="boeken">
-    <div class="booking__intro reveal">
-      <p class="eyebrow">Afspraak maken</p>
-      <h2>Reserveer je <em>stoel</em>.</h2>
-      <p class="muted">Kies je dienst, dag en uur. Je aanvraag gaat meteen via WhatsApp naar Starbarber, en zij bevestigen zo snel mogelijk.</p>
-      <ul class="checks">
-        <li>Geen account nodig</li>
-        <li>Bevestiging via WhatsApp</li>
-        <li>Liever bellen? <a href="tel:+32485956021">0485 95 60 21</a></li>
-      </ul>
-    </div>
-
-    <form class="book reveal" id="bookForm" novalidate>
-      <fieldset>
-        <legend>1. Dienst</legend>
-        <select name="service" id="service" aria-label="Dienst"><!-- gevuld door script.js --></select>
-      </fieldset>
-
-      <fieldset>
-        <legend>2. Dag</legend>
-        <div class="days" id="days"></div>
-      </fieldset>
-
-      <fieldset>
-        <legend>3. Tijdstip</legend>
-        <div class="slots" id="slots"></div>
-      </fieldset>
-
-      <fieldset class="row2">
-        <legend class="sr-only">4. Jouw gegevens</legend>
-        <label class="field"><span>Naam</span><input type="text" name="name" id="name" autocomplete="given-name" placeholder="Je voornaam" required></label>
-        <label class="field"><span>Opmerking <small>(optioneel)</small></span><input type="text" name="note" id="note" placeholder="bv. zelfde als vorige keer"></label>
-      </fieldset>
-
-      <div class="book__summary" id="summary" aria-live="polite">Kies een dag en tijdstip.</div>
-      <button type="submit" class="btn btn--wa btn--block">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-        Verstuur via WhatsApp
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#top" class="brand" aria-label="Starbarber Kortenberg — naar boven">
+        <span class="brand__script">Star</span>
+        <span class="brand__stars" aria-hidden="true">★★★</span>
+        <span class="brand__sub">Barber</span>
+      </a>
+      <nav class="nav__links" aria-label="Hoofdmenu">
+        <a href="#diensten">Diensten</a>
+        <a href="#werk">Werk</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#locaties">Bezoek</a>
+      </nav>
+      <a href="#boeken" class="btn btn--gold btn--sm nav__cta">Boek nu</a>
+      <button class="nav__burger" id="burger" aria-label="Menu openen" aria-expanded="false">
+        <span></span><span></span>
       </button>
-      <p class="book__err" id="bookErr" role="alert"></p>
-    </form>
-  </section>
+    </div>
+  </header>
 
-  <!-- BEZOEK -->
-  <section class="section visit" id="bezoek">
-    <div class="visit__info reveal">
-      <p class="eyebrow">Bezoek ons</p>
-      <h2>Leuvensesteenweg <em>264</em></h2>
-      <p class="muted">3070 Kortenberg, aan de steenweg tussen Leuven en Brussel.</p>
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <nav>
+      <a href="#diensten">Diensten</a>
+      <a href="#werk">Werk</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#locaties">Bezoek</a>
+      <a href="#boeken" class="btn btn--gold">Boek je plek</a>
+    </nav>
+  </div>
 
-      <div class="open-now" data-status-box>
-        <span class="dot"></span><span data-status-text>Openingsuren laden…</span>
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hex"></div>
+        <div class="hero__glow"></div>
       </div>
 
-      <table class="hours" id="hours"><!-- gevuld door script.js --></table>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow reveal">Barbier &nbsp;·&nbsp; Kortenberg</p>
+          <h1 class="hero__title reveal">
+            <span>Fris.</span>
+            <span>Strak.</span>
+            <span class="script gold-text">Starbarber.</span>
+          </h1>
+          <p class="hero__lead reveal">De cleanste cuts en de scherpste fades van Kortenberg. Van een strakke skin fade tot een verzorgde baard: jong of oud, bij Starbarber is iedereen welkom.</p>
 
-      <div class="visit__actions">
-        <a href="tel:+32485956021" class="btn btn--gold">Bel 0485 95 60 21</a>
-        <a href="https://www.google.com/maps/dir/?api=1&destination=Starbarber+Kortenberg+Leuvensesteenweg+264+3070+Kortenberg" target="_blank" rel="noopener" class="btn btn--ghost">Route plannen</a>
+          <div class="hero__actions reveal">
+            <a href="#boeken" class="btn btn--gold">Maak een afspraak
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a href="tel:+32485956021" class="btn btn--ghost">Bel de zaak</a>
+          </div>
+
+          <div class="perks reveal">
+            <p class="walkin walkin--card">Enkel op afspraak, dus geen wachtrij</p>
+          </div>
+
+          <a class="rating reveal" href="https://www.google.com/maps/search/?api=1&query=Starbarber+Kortenberg+Leuvensesteenweg+264" target="_blank" rel="noopener">
+            <span class="rating__score">4,6</span>
+            <span class="rating__meta">
+              <span class="stars" aria-label="5 sterren">★★★★★</span>
+              <span>243 reviews op Google</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <figure class="card card--a"><img src="img/slick-back.jpg" alt=""></figure>
+          <figure class="card card--b"><img src="img/fade-baard.jpg" alt=""></figure>
+          <figure class="card card--c"><img src="img/crop-fade.jpg" alt=""></figure>
+          <div class="badge-open" id="heroStatus">
+            <span class="dot"></span><span class="badge-open__text">Wo – Zo · 10:30 – 19:00</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#marquee" class="scroll-hint" aria-label="Scroll naar beneden"><span></span></a>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" id="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Skin fade</span><i>★</i><span>High fade</span><i>★</i><span>Taper</span><i>★</i><span>Baard &amp; contouren</span><i>★</i><span>Slick back</span><i>★</i><span>Kids cuts</span><i>★</i><span>Enkel op afspraak</span><i>★</i>
+        <span>Skin fade</span><i>★</i><span>High fade</span><i>★</i><span>Taper</span><i>★</i><span>Baard &amp; contouren</span><i>★</i><span>Slick back</span><i>★</i><span>Kids cuts</span><i>★</i><span>Enkel op afspraak</span><i>★</i>
       </div>
     </div>
-    <div class="visit__map reveal">
-      <iframe title="Kaart Starbarber Kortenberg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        src="https://maps.google.com/maps?q=Starbarber%20Kortenberg%2C%20Leuvensesteenweg%20264%2C%203070%20Kortenberg&z=16&output=embed"></iframe>
+
+    <!-- ============ OVER ============ -->
+    <section class="section about">
+      <div class="container about__grid">
+        <div class="about__media reveal">
+          <img src="img/gevel.jpg" alt="De gevel van Starbarber aan de Leuvensesteenweg in Kortenberg" loading="lazy">
+          <img src="img/interieur.jpg" alt="Kappersstoel en productwand bij Starbarber" loading="lazy" class="about__media-sm">
+        </div>
+        <div class="about__copy">
+          <p class="eyebrow reveal">Waarom Starbarber?</p>
+          <h2 class="h2 reveal">Jouw vaste barbier<br><em class="gold-text">in Kortenberg.</em></h2>
+          <p class="reveal">Bij Starbarber werken we tot op het detail: de lijnen, de overgang, de afwerking. Elke knipbeurt begint met een korte babbel over wat je wil, en pas als jij tevreden in de spiegel kijkt, zijn wij klaar.</p>
+          <p class="reveal">Omdat we enkel op afspraak werken, zit je op jouw moment in de stoel, zonder wachten. Vaders, zonen, studenten: in onze zaak aan de Leuvensesteenweg is iedereen welkom.</p>
+
+          <dl class="stats reveal">
+            <div><dt>4,6<span>★</span></dt><dd>Google-score</dd></div>
+            <div><dt>243</dt><dd>Reviews</dd></div>
+            <div><dt>5/7</dt><dd>Dagen open</dd></div>
+            <div><dt>1.500+</dt><dd>Volgers</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DIENSTEN ============ -->
+    <section class="section services" id="diensten">
+      <div class="hex hex--faint" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow reveal">Diensten</p>
+          <h2 class="h2 reveal">Kies je <em class="gold-text">cut</em></h2>
+        </header>
+
+        <!-- PRIJZEN: geen publieke prijslijst gevonden, dus "op aanvraag". Invullen zodra de zaak ze doorgeeft. -->
+        <div class="menu">
+          <div class="menu__col reveal">
+            <h3 class="menu__cat">Haar</h3>
+            <ul>
+              <li><div class="menu__row"><span>Knippen</span><i></i><b class="ask">Op aanvraag</b></div><p>Schaar en tondeuse, klassiek of modern. Afgewerkt en gestyled.</p></li>
+              <li><div class="menu__row"><span>Fade / Taper</span><i></i><b class="ask">Op aanvraag</b></div><p>Low, mid, high of skin fade, met een naadloze overgang.</p></li>
+              <li><div class="menu__row"><span>Kinderen</span><i></i><b class="ask">Op aanvraag</b></div><p>Een nette cut voor de jongste klanten.</p></li>
+            </ul>
+          </div>
+          <div class="menu__col reveal">
+            <h3 class="menu__cat">Baard &amp; combo</h3>
+            <ul>
+              <li><div class="menu__row"><span>Baard</span><i></i><b class="ask">Op aanvraag</b></div><p>Trimmen, contouren en strakke lijnen.</p></li>
+              <li><div class="menu__row"><span>Knippen + baard</span><i></i><b class="ask">Op aanvraag</b></div><p>De complete fresh-up van top tot kin.</p></li>
+            </ul>
+          </div>
+        </div>
+        <p class="menu__note reveal">Vraag gerust naar de prijs als je je afspraak maakt, via WhatsApp of telefoon.</p>
+      </div>
+    </section>
+
+    <!-- ============ WERK ============ -->
+    <section class="section work" id="werk">
+      <div class="container">
+        <header class="section__head section__head--row">
+          <div>
+            <p class="eyebrow reveal">Uit de stoel</p>
+            <h2 class="h2 reveal">Het <em class="gold-text">werk</em> spreekt</h2>
+          </div>
+          <a href="https://www.instagram.com/starbarber.kortenberg/" target="_blank" rel="noopener" class="link-arrow reveal">
+            Volg @starbarber.kortenberg
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </header>
+
+        <div class="gallery">
+          <button class="gallery__item g-tall reveal" data-src="img/fade-baard.jpg" data-cap="Mid fade met textuur en baard"><img src="img/fade-baard.jpg" alt="Mid fade met textuur en verzorgde baard" loading="lazy"><span>Fade &amp; baard</span></button>
+          <button class="gallery__item reveal" data-src="img/crop-fade.jpg" data-cap="Crop met skin fade"><img src="img/crop-fade.jpg" alt="Korte crop met skin fade" loading="lazy"><span>Skin fade</span></button>
+          <button class="gallery__item reveal" data-src="img/taper-baard.jpg" data-cap="Taper met baard"><img src="img/taper-baard.jpg" alt="Taper fade met baard" loading="lazy"><span>Taper</span></button>
+          <button class="gallery__item g-tall reveal" data-src="img/man-bun-fade.jpg" data-cap="Man bun met fade"><img src="img/man-bun-fade.jpg" alt="Man bun met fade aan de zijkanten" loading="lazy"><span>Man bun</span></button>
+          <button class="gallery__item reveal" data-src="img/slick-back.jpg" data-cap="Slick back met low fade"><img src="img/slick-back.jpg" alt="Slick back met low fade" loading="lazy"><span>Slick back</span></button>
+          <button class="gallery__item reveal" data-src="img/pompadour.jpg" data-cap="Pompadour met taper"><img src="img/pompadour.jpg" alt="Pompadour met taper" loading="lazy"><span>Pompadour</span></button>
+          <button class="gallery__item g-wide reveal" data-src="img/zaak.jpg" data-cap="De zaak, Leuvensesteenweg 264"><img src="img/zaak.jpg" alt="Het interieur van Starbarber met de kappersstoelen" loading="lazy"><span>De zaak</span></button>
+          <button class="gallery__item g-wide reveal" data-src="img/werkplek.jpg" data-cap="Werkplek"><img src="img/werkplek.jpg" alt="Werkplek met spiegel en wastafel" loading="lazy"><span>Werkplek</span></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REVIEWS ============ -->
+    <section class="section reviews" id="reviews">
+      <div class="container reviews__grid">
+        <div class="reviews__score reveal">
+          <p class="eyebrow">Wat klanten zeggen</p>
+          <div class="big-score">4,6</div>
+          <div class="stars stars--lg" aria-label="5 sterren">★★★★★</div>
+          <p class="muted">Gemiddelde uit <strong>243 Google-reviews</strong></p>
+          <a href="https://www.google.com/maps/search/?api=1&query=Starbarber+Kortenberg+Leuvensesteenweg+264" target="_blank" rel="noopener" class="link-arrow">Alle reviews bekijken
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+
+        <div class="quotes">
+          <blockquote class="quote reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Super toffe kerels en doen hun werk super goed!! Werken tot op details. Ik heb mijn vaste barbier gevonden!”</p>
+            <footer><span class="avatar">B</span><span><strong>Bram V.</strong><small>Google review</small></span></footer>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Na 2 kappersbeurten op een maand ga ik hier zeker mijn vaste kapper van maken. Zeer vriendelijk team en zeer goede kappers.”</p>
+            <footer><span class="avatar">A</span><span><strong>Arnoud S.</strong><small>Google review</small></span></footer>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <div class="stars">★★★★★</div>
+            <p>“Geweldig gewoon. Als je in Kortenberg woont of langsgaat, spring dan even langs bij Starbarber. Echt een aanrader!!”</p>
+            <footer><span class="avatar">J</span><span><strong>Jenti V.</strong><small>Google review</small></span></footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BOEKEN ============ -->
+    <section class="section booking" id="boeken">
+      <div class="hex hex--faint" aria-hidden="true"></div>
+      <div class="container booking__grid">
+        <div class="booking__intro">
+          <p class="eyebrow reveal">Afspraak maken</p>
+          <h2 class="h2 reveal">Reserveer je <em class="gold-text">stoel</em></h2>
+          <p class="reveal">Kies je dienst, dag en uur. Je aanvraag gaat meteen via WhatsApp naar Starbarber, en zij bevestigen zo snel mogelijk.</p>
+          <ul class="checks reveal">
+            <li>Geen account nodig</li>
+            <li>Bevestiging via WhatsApp</li>
+            <li>Liever bellen? <a href="tel:+32485956021">0485 95 60 21</a></li>
+          </ul>
+        </div>
+
+        <form class="book reveal" id="bookForm" novalidate>
+          <fieldset>
+            <legend>1. Dienst</legend>
+            <select name="service" id="service" required>
+              <option value="Knippen">Knippen</option>
+              <option value="Fade / Taper" selected>Fade / Taper</option>
+              <option value="Knippen + baard">Knippen + baard</option>
+              <option value="Baard">Baard</option>
+              <option value="Kinderen">Kinderen</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <legend>2. Dag</legend>
+            <div class="days" id="days"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>3. Tijdstip</legend>
+            <div class="slots" id="slots"></div>
+          </fieldset>
+
+          <fieldset class="row2">
+            <legend class="sr-only">4. Jouw gegevens</legend>
+            <label class="field"><span>Naam</span><input type="text" name="name" id="name" autocomplete="given-name" placeholder="Je voornaam" required></label>
+            <label class="field"><span>Opmerking <small>(optioneel)</small></span><input type="text" name="note" id="note" placeholder="bv. zelfde als vorige keer"></label>
+          </fieldset>
+
+          <div class="book__summary" id="summary" aria-live="polite">Kies een dag en tijdstip.</div>
+          <button type="submit" class="btn btn--gold btn--block">
+            <svg viewBox="0 0 24 24" aria-hidden="true" class="wa"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
+            Verstuur via WhatsApp
+          </button>
+          <p class="book__err" id="bookErr" role="alert"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ BEZOEK ============ -->
+    <section class="section locations" id="locaties">
+      <div class="container">
+        <header class="section__head">
+          <p class="eyebrow reveal">Kom langs</p>
+          <h2 class="h2 reveal">Leuvensesteenweg <em class="gold-text">264</em></h2>
+        </header>
+
+        <div class="loc-grid loc-grid--one">
+          <article class="loc reveal">
+            <div class="loc__map">
+              <iframe title="Kaart Starbarber Kortenberg" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                src="https://www.google.com/maps?q=Starbarber+Kortenberg,+Leuvensesteenweg+264,+3070+Kortenberg&z=16&output=embed"></iframe>
+            </div>
+            <div class="loc__body">
+              <div class="loc__top">
+                <h3>Kortenberg</h3>
+                <span class="status" data-status></span>
+              </div>
+              <p class="loc__addr">Leuvensesteenweg 264<br>3070 Kortenberg</p>
+              <ul class="hours" data-hours></ul>
+              <div class="loc__actions">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Starbarber+Kortenberg+Leuvensesteenweg+264+3070+Kortenberg" target="_blank" rel="noopener" class="btn btn--ghost btn--sm">Route</a>
+                <a href="tel:+32485956021" class="btn btn--gold btn--sm">0485 95 60 21</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta">
+      <div class="cta__bg" aria-hidden="true"><img src="img/zaak.jpg" alt=""></div>
+      <div class="container cta__inner">
+        <h2 class="h2 reveal">Klaar voor een <em class="gold-text">frisse cut?</em></h2>
+        <p class="reveal">Stuur een WhatsApp of bel even. We zien je graag in de stoel.</p>
+        <div class="hero__actions reveal">
+          <a href="#boeken" class="btn btn--gold">Boek nu</a>
+          <a href="https://www.instagram.com/starbarber.kortenberg/" target="_blank" rel="noopener" class="btn btn--ghost">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <a href="#top" class="brand brand--lg">
+          <span class="brand__script">Star</span>
+          <span class="brand__stars" aria-hidden="true">★★★</span>
+          <span class="brand__sub">Barber</span>
+        </a>
+        <p class="muted">Barbier en herenkapper in Kortenberg.<br>Cleane cuts, scherpe fades, op afspraak.</p>
+      </div>
+      <div>
+        <h4>Openingsuren</h4>
+        <p class="muted">Maandag &amp; dinsdag — gesloten<br>Woensdag – zondag — 10:30 – 19:00</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p class="muted">Leuvensesteenweg 264, 3070 Kortenberg<br><a href="tel:+32485956021">0485 95 60 21</a> · <a href="https://wa.me/32485956021" target="_blank" rel="noopener">WhatsApp</a></p>
+      </div>
+      <div>
+        <h4>Volg ons</h4>
+        <a class="social" href="https://www.instagram.com/starbarber.kortenberg/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          Instagram
+        </a>
+        <a class="social" href="https://www.tiktok.com/@starbarberkortenberg" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 3c.4 2.6 2.2 4.4 5 4.6"/></svg>
+          TikTok
+        </a>
+      </div>
     </div>
-  </section>
+    <div class="container footer__bottom">
+      <span>© <span id="year"></span> Starbarber Kortenberg. Alle rechten voorbehouden.</span>
+      <a href="#top">Naar boven ↑</a>
+    </div>
+  </footer>
 
-  <!-- CTA -->
-  <section class="cta">
-    <img src="img/logo-gold.svg" alt="" class="cta__logo">
-    <h2>Tijd voor een <em>frisse cut</em>?</h2>
-    <p>Stuur ons een WhatsApp of bel even. We zien je graag in de stoel.</p>
-    <a href="#boeken" class="btn btn--gold btn--lg">Maak een afspraak</a>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="footer__brand">
-    <img src="img/logo-cream.svg" alt="" class="footer__logo">
-    <p>Starbarber Kortenberg<br><span class="muted">Leuvensesteenweg 264, 3070 Kortenberg</span></p>
+  <!-- Mobiele boekbalk -->
+  <div class="mbar" id="mbar">
+    <a href="tel:+32485956021" class="mbar__call" aria-label="Bel Starbarber">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+    </a>
+    <a href="#boeken" class="btn btn--gold btn--block">Boek je afspraak</a>
   </div>
-  <div class="footer__links">
-    <a href="tel:+32485956021">0485 95 60 21</a>
-    <a href="https://wa.me/32485956021" target="_blank" rel="noopener">WhatsApp</a>
-    <a href="https://www.instagram.com/starbarber.kortenberg/" target="_blank" rel="noopener">Instagram</a>
-    <a href="https://www.tiktok.com/@starbarberkortenberg" target="_blank" rel="noopener">TikTok</a>
-    <a href="https://www.google.com/maps/search/?api=1&query=Starbarber+Kortenberg+Leuvensesteenweg+264" target="_blank" rel="noopener">Google Maps</a>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Foto vergroot">
+    <button class="lightbox__close" id="lbClose" aria-label="Sluiten">✕</button>
+    <button class="lightbox__nav lightbox__prev" id="lbPrev" aria-label="Vorige">‹</button>
+    <figure><img id="lbImg" alt=""><figcaption id="lbCap"></figcaption></figure>
+    <button class="lightbox__nav lightbox__next" id="lbNext" aria-label="Volgende">›</button>
   </div>
-  <p class="footer__copy muted">© <span id="year"></span> Starbarber · Kortenberg</p>
-</footer>
 
-<!-- Mobiele knoppen -->
-<div class="fabs">
-  <a href="tel:+32485956021" class="fab" aria-label="Bel Starbarber">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-    <span>Bel</span>
-  </a>
-  <a href="https://wa.me/32485956021" target="_blank" rel="noopener" class="fab fab--wa" aria-label="WhatsApp Starbarber">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>
-    <span>WhatsApp</span>
-  </a>
-</div>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" hidden>
-  <button class="lightbox__close" aria-label="Sluiten">×</button>
-  <button class="lightbox__nav lightbox__prev" aria-label="Vorige">‹</button>
-  <img alt="">
-  <button class="lightbox__nav lightbox__next" aria-label="Volgende">›</button>
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

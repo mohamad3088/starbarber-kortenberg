@@ -15,11 +15,12 @@ Premium one-page website voor Starbarber, Leuvensesteenweg 264, 3070 Kortenberg.
 - [ ] Diensten kloppen? (knippen, fade/taper, knippen + baard, baard, kinderen)
 - [ ] Openingsuren (`HOURS` in `script.js`)
 - [ ] Toestemming voor de foto's (Instagram + Google Maps), liefst in hogere resolutie
-- [ ] Logo: `img/logo.svg` is een eigen monogram. Hun echte logo staat op de gevel/het visitekaartje: vraag het bestand.
+- [ ] Logo: in de menubalk staat nu "Star ★★★ Barber" in tekst. Hun echte logo staat op de gevel/het visitekaartje: vraag het bestand.
 
 ## Bestanden
 - `index.html`, `styles.css`, `script.js`: statische site, geen build nodig
-- `img/`: webfoto's + logo-varianten (goud/crème/donker). `hero-stoel.jpg` is gespiegeld.
+- `img/`: webfoto's + `logo-gold.svg` (favicon)
+- Stijl: wit thema zoals Classic Barbershop (`theme.css`), met drie zwevende foto's in de hero
 - `img/raw/`: originele downloads + `urls.txt` (niet in git)
 
 Lokaal bekijken: `python -m http.server 5181` in deze map, daarna http://localhost:5181.
